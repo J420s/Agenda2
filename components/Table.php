@@ -1,11 +1,11 @@
 <?php
-require_once("db.php");
+require_once("./lib/db.php");
 
 class Table{
 
     public function __construct($tableID,$columns,$page = 0, $order = 'id'){
-        $this->page = $_REQUEST['page'] ? $_REQUEST['page'] : $page;
-        $this->order = $_REQUEST['order'] ? $_REQUEST['order'] : $order;
+        $this->page = isset($_REQUEST['page']) ? $_REQUEST['page'] : $page;
+        $this->order = isset($_REQUEST['order']) ? $_REQUEST['order'] : $order;
         $this->tableID = $tableID;
         $this->columns = $columns;
     }

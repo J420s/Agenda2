@@ -1,7 +1,3 @@
-<?php include_once "./components/Table.php"?>
-<?php include_once "./components/Navigator.php"?>
-<?php include_once "./lib/db.php"?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,23 +11,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="style.css">
 
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row" style="height:50px"></div>
-      <div class="row justify-content-center">
-          <div class="col-md-6">
-              <?php
-                $contactes = new Table('contactes',array('id','nom','cognoms'));
-                echo $contactes->build_table();
-                
-                $nav = new Navigator('contactes');
-                echo $nav->build_nav();
-              ?>
-          </div>
-      </div>
-    </div>
+   
+    <div class="row" style="height:50px"></div>
+    <?php 
+        $myForm = new Form(array(   'ID'=>'number',
+                                    'nom'=>'text',
+                                    'cognoms'=>'text'))
+    ?>
   </body>
 </html>
