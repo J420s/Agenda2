@@ -24,10 +24,10 @@
       <div class="row justify-content-center">
           <div class="col-md-6">
               <?php
-                $contactes = new Table('contactes',array('id','nom','cognoms'));
+                $contactes = new Table('contactes');
                 echo $contactes->build_table();
                 
-                $nav = new Navigator('contactes');
+                $nav = new Navigator($contactes->numberOfPages);
                 echo $nav->build_nav();
               ?>
           </div>

@@ -4,23 +4,26 @@ require_once("./lib/db.php");
 
 class Navigator{
 
-    public function __construct($tableID,$page = 0, $order = 'id'){
+    public function __construct($numberOfPages,$page = 0, $order = 'id'){
         $this->page = isset($_REQUEST['page']) ? $_REQUEST['page'] : $page;
         $this->order = isset($_REQUEST['order']) ? $_REQUEST['order'] : $order;
-        $this->numberOfPages = number_of_pages($tableID);
+        $this->numberOfPages = $numberOfPages;
     }
 
     public function build_nav(){
 
-        $row = '<div class="row justify-content-center">';
-        $rowEnd = '</div>';
+        $html = '<div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="row justify-content-center">';
+        
+        $html .= $this->button_start() . 
+                $this->button_previous() . 
+                $this->button_next() . 
+                $this->button_last(); 
 
-        $html = $row;  
-        $html .= $this->button_start();
-        if($this->page > 0) $html .= $this->button_previous();
-        if($this->page < $this->numberOfPages - 1) $html .= $this->button_next();
-        $html .= $this->button_last(); 
-        $html .= $rowEnd;
+        $html .=       '</div>
+                    </div>
+                </div>';
 
         return $html;
     }
@@ -28,34 +31,51 @@ class Navigator{
     private function button_start(){
         $html = '<div class="col-md-2">
                     <a href="index.php?page=0&order='. $this->order .'">
-                        <img class="img-fluid" src="./buttons/arrow-start.png">
+                        <button type="button" class="btn btn-secondary btn-sm">
+                            <span class="glyphicon glyphicon-fast-backward"></span>
+                        </button>
                     </a>
                 </div>';
         return $html;
     }
 
     private function button_previous(){
-        $html = '<div class="col-md-2 ">
-                    <a href="index.php?page='. ($this->page - 1) .'&order='. $this->order .'">
-                        <img class="img-fluid" src="./buttons/arrow-left.png">
-                    </a>
-                </div>';
+        if($this->page > 0){
+            $html = '<div class="col-md-2">
+                        <a href="index.php?page='. ($this->page - 1) .'&order='. $this->order .'">
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                <span class="glyphicon glyphicon-backward"></span>
+                            </button>
+                        </a>
+                    </div>';
+        }else{
+            $html = null;
+        }
+        
         return $html;
     }
 
     private function button_next(){
-        $html = '<div class="col-md-2 ">
-                    <a href="index.php?page='. ($this->page + 1) .'&order='. $this->order .'">
-                        <img class="img-fluid" src="./buttons/arrow-right.png">
-                    </a>
-                </div>';
+        if($this->page < $this->numberOfPages - 1){
+            $html = '<div class="col-md-2 ">
+                        <a href="index.php?page='. ($this->page + 1) .'&order='. $this->order .'">
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                <span class="glyphicon glyphicon-forward"></span>
+                            </button>
+                        </a>
+                    </div>';
+        }else{
+            $html = null;
+        }
         return $html;
     }
 
     function button_last(){
-        $html = '<div class="col-md-2 ">
+        $html = '<div class="col-md-2">
                     <a href="index.php?page='. ($this->numberOfPages - 1) .'&order='. $this->order .'">
-                        <img class="img-fluid" src="./buttons/arrow-end.png">
+                        <button type="button" class="btn btn-secondary btn-sm">
+                            <span class="glyphicon glyphicon-fast-forward"></span>
+                        </button>
                     </a>
                 </div>';
         return $html;

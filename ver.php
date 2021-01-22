@@ -1,3 +1,5 @@
+<?php require_once"./components/Form.php"?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,16 +13,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 
   </head>
   <body>
    
     <div class="row" style="height:50px"></div>
     <?php 
-        $myForm = new Form(array(   'ID'=>'number',
-                                    'nom'=>'text',
-                                    'cognoms'=>'text'))
+        $myForm = new Form($_REQUEST['id']);
+        $myForm -> build_form('readonly');
     ?>
+    <div class="row justify-content-center m-5">
+        <div class="col-md-6 align-self-center">
+          <a class="btn btn-secondary" href="index.php?page=<?=$myForm->page?>&order=<?=$myForm->order?>" role="button">Close</a>
+        </div>
+    </div>
+
   </body>
 </html>
