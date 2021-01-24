@@ -34,6 +34,13 @@ class Table{
                         </thead>
                         <tbody>
                         '. $this->getTableContent() .'
+                            <tr>
+                                <td colspan="100%">
+                                    <a href="nuevo.php?page='. $this->page .'&order='. $this->order .'">
+                                        <span class="glyphicon glyphicon-plus"></span> Añadir registro
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>';
@@ -55,8 +62,16 @@ class Table{
                                     <span class='glyphicon glyphicon-search color-white'></span>
                                 </a>
                             </td>
-                            <td><a href='form.php'><span class='glyphicon glyphicon-pencil color-white'></span></a></td>
-                            <td><a href='form.php'><span class='glyphicon glyphicon-trash color-white'></span></a></td>
+                            <td>
+                                <a href='editar.php?id=". $row['id'] ."&page=". $this->page ."&order=". $this->order ."'>
+                                    <span class='glyphicon glyphicon-pencil color-white'></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href='borrar.php?id=". $row['id'] ."&page=". $this->page ."&order=". $this->order ."'>
+                                    <span class='glyphicon glyphicon-trash color-white'></span>
+                                </a>
+                            </td>
                         </tr>";
         }
         return $html;

@@ -20,14 +20,8 @@
    
     <div class="row" style="height:50px"></div>
     <?php 
-        $myForm = new Form($_REQUEST['id']);
-        $myForm -> build_form('readonly');
+        $myForm = new Form();
+        $myForm -> build_form();
     ?>
-    <div class="row justify-content-center m-5">
-        <div class="col-md-6 align-self-center">
-          <a class="btn btn-secondary" href="index.php?page=<?=$myForm->page?>&order=<?=$myForm->order?>">Volver</a>
-        </div>
-    </div>
-
   </body>
 </html>
