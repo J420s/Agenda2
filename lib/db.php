@@ -1,9 +1,7 @@
 <?php
-require_once("utils.php");
+
 
 define("Page_Size",5);
-
-
 
 function mysql_ask($query){
     
@@ -63,9 +61,10 @@ function getPage($tableID,$page = 0, $order = 'id'){
 
 function number_of_pages($tableID){
     $numberOfRows = mysql_ask("SELECT COUNT(*) as total FROM ".$tableID) -> fetch_assoc()['total'];
-    return round($numberOfRows / Page_Size);
+    return ceil($numberOfRows / Page_Size);
 }
 
+//Busca el siguiente ID sin usar
 function getFreeID(){
     $maxID = mysql_ask("SELECT MAX(id) FROM contactes") -> fetch_assoc()['MAX(id)'];
     return intval($maxID) + 1;
